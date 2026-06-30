@@ -16,31 +16,49 @@ const notesSlice = createSlice({
         add: (state, action) => {
 
             const newNote = {
-                id: state.length + 1,
+                id: nanoid(),
                 title: action.payload,
                 checked: false,
-                status: "active"
+                status: "active",
+                pinned: false
             };
 
             state.push(newNote)
-
         },
+
 
         edit: (state, action) => {
 
+            const note = state.find(note => note.id === action.payload.id);
+
+            if (note) {
+                note.title = action.payload.title;
+            }
+
         },
+
 
         remove: (state, action) => {
+            return state.filter(note => note.id !== action.payload);
+        },
+
+        pin: (state, action) => {
+
+            const note = state.find(note => note.id === action.payload)
+
+            if (note) {
+                note.pinned = !note.pinned
+            }
 
         },
 
-        restore: (state, action) => {
 
+        restore: (state, action) => {
             const expiredNote = state.find(note => note.id == action.payload);
             expiredNote.status = "active"
         }
     },
 });
 
-export const { add, edit, remove, restore } = notesSlice.actions;
+export const { add, edit, remove, pin, restore } = notesSlice.actions;
 export default notesSlice.reducer;

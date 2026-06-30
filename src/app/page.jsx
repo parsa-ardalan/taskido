@@ -2,7 +2,7 @@
 
 import Header from "@/components/header/Header";
 import Notes from "@/components/notes/Notes";
-import NoteModal from "@/components/notes/NoteModal";
+import NoteModal from "@/components/notes/modals/NoteModal";
 
 import { useState } from "react";
 

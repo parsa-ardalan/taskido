@@ -30,7 +30,7 @@ export default function NoteModal(props) {
     return (
         <div className="w-full h-full fixed flex items-center justify-center bg-black/50 backdrop-blur-lg">
 
-            {/* routine box */}
+            {/* note box */}
             <div className="w-4/5 h-14 flex gap-3" dir="rtl">
 
                 {/* button */}

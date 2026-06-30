@@ -16,9 +16,10 @@ export default function Notes() {
         "Let's make something beautiful today.",
     ];
 
-    const notesList = useSelector(state => state.notes)
+    const notesList = useSelector(state => state.notes);
+    const sortedNotes = [...notesList].sort((a, b) => b.pinned - a.pinned)
 
-    const activeNotesList = notesList.filter(
+    const activeNotesList = sortedNotes.filter(
         (note) => note.status === "active"
     );
     const [noteTitle, setNoteTitle] = useState("")
@@ -39,7 +40,7 @@ export default function Notes() {
 
             {/* notes */}
             <div className="w-full h-auto grid grid-cols-1 gap-5 px-3">
-                {activeNotesList.map((note) => <Note key={note.id} title={note.title} checked={note.checked} />)}
+                {activeNotesList.map((note) => <Note key={note.id} id={note.id} title={note.title} checked={note.checked} pinned={note.pinned} />)}
             </div>
 
         </div>
