@@ -1,34 +1,21 @@
 "use client"
 
-import { changeTheme } from "@/redux/settings/seetingsSlice"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
 
 export default function Theme() {
-
     const { resolvedTheme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
 
-    const dispatch = useDispatch()
-
+    // جلوگیری از Hydration mismatch در SSR
     useEffect(() => {
         setMounted(true)
     }, [])
 
-    if (!mounted) {
-        return <div className="h-[60px]" />
-    }
+    if (!mounted) return null
 
     const isDark = resolvedTheme === "dark"
-
-    const toggleTheme = () => {
-        const newTheme = isDark ? "light" : "dark"
-
-        setTheme(newTheme)
-        dispatch(changeTheme(newTheme))
-    }
 
     return (
         <div className="shadow-sm shadow-white/50 rounded-2xl p-4 flex items-center justify-between">
@@ -38,7 +25,7 @@ export default function Theme() {
             </div>
 
             <button
-                onClick={toggleTheme}
+                onClick={() => setTheme(isDark ? "light" : "dark")}
                 className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition text-white"
                 aria-label="Toggle Theme"
             >
