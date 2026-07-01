@@ -10,10 +10,12 @@ import storage from 'redux-persist/lib/storage'
 // slices
 import notesSlice from "@/redux/notes/notesSlice"
 import routineSlice from '../routine/routineSlice'
+import settingsSlice from "@/redux/settings/seetingsSlice"
 
 const rootReducer = combineReducers({
     notes: notesSlice,
     routine: routineSlice,
+    settings: settingsSlice,
 })
 
 const persistConfig = {
