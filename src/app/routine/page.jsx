@@ -6,11 +6,12 @@ import RoutineModal from "@/components/routine/RoutineModal";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "@/redux/routine/routineSlice";
+import Routine from "@/components/routine/Routine";
 
-export default function Routine() {
+export default function RoutinePage() {
 
 
-    const routineList = useSelector(state => state.routine.value)
+    const routineList = useSelector(state => state.routine)
     console.log(routineList)
 
 
@@ -87,23 +88,10 @@ export default function Routine() {
                 {/* user routine */}
                 <div className="w-full h-auto grid gap-5 py-5">
                     {
-                        routineList.map((routine) => (
-                            <div className="w-full h-20 flex" key={routine.id}>
-
-                                <div className="w-1/4 h-full flex items-center justify-center">
-                                    <Image src={routine.icon} width={35} height={35} alt="icon" />
-                                </div>
-
-                                <div className="h-full w-2/4 flex items-center justify-start">
-                                    <h3 className="text-lg text-white"> {routine.name} </h3>
-                                </div>
-
-                                <div className="h-full w-1/4 flex items-center justify-center text-sm text-white/50"> {routine.time} </div>
-                            </div>
-                        ))
+                        routineList.map((routine) => <Routine name={routine.name} time={routine.time} icon={routine.icon} id={routine.id} key={routine.id} />)
                     }
 
-                    <button className="w-full h-14 text-md bg-green-500/15 rounded-xl flex items-center justify-center" onClick={openModal}>
+                    <button className="w-full h-14 text-md shadow-sm shadow-green-500/50 text-green-700 rounded-xl flex items-center justify-center" onClick={openModal}>
                         add new routine
                     </button>
 

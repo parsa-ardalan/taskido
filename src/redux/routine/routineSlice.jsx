@@ -1,29 +1,43 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
+
+const initialState = [];
 
 const RoutineSlice = createSlice({
     name: "routine",
 
-    initialState: {
-        value: []
-    },
+    initialState,
 
     reducers: {
 
         add: (state, action) => {
-
-            state.value.push({
-                id: state.value.length,
+            state.push({
+                id: nanoid(),
                 name: action.payload.name,
                 time: action.payload.time,
                 icon: action.payload.icon
             })
         },
 
-        remove: (state, action) => {
+        edit: (state, action) => {
+            const { id, name, time } = action.payload
 
+            const routine = state.find(r => r.id === id)
+
+            if (routine) {
+                routine.name = name
+                routine.time = time
+            }
+        },
+
+
+        remove: (state, action) => {
+            return state.filter(
+                (routine) => routine.id !== action.payload
+            );
         }
+
     }
 });
 
-export const { add, remove } = RoutineSlice.actions
+export const { add, edit, remove } = RoutineSlice.actions
 export default RoutineSlice.reducer;
