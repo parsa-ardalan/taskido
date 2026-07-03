@@ -8,7 +8,7 @@ import Theme from "@/components/settings/Theme"
 export default function SettingsPage() {
 
     return (
-        <div className="max-w-xl mx-auto p-5 space-y-5">
+        <div className="page grid grid-cols-1 gap-5">
 
             {/* Language */}
             <Language />

@@ -13,6 +13,22 @@ export default function Note({ id, title, checked, pinned }) {
     const [taskCheck, setCheck] = useState(checked);
     const [noteModal, setModal] = useState(false);
 
+    //remove 
+    const [removeModal, setRemoveModal] = useState(false)
+
+    // edit
+    const [editModal, setEditModal] = useState(false)
+
+    // pin
+    const pinNote = (e) => {
+
+        // logic
+        e.stopPropagation()
+        dispatch(pin(id))
+    }
+
+    // function define
+
     const toggleCheck = (e) => {
 
         e.stopPropagation();
@@ -36,21 +52,6 @@ export default function Note({ id, title, checked, pinned }) {
     const toggleModal = () => {
         setModal(prev => !prev)
     }
-
-    //remove 
-    const [removeModal, setRemoveModal] = useState(false)
-
-    // edit
-    const [editModal, setEditModal] = useState(false)
-
-    // pin
-    const pinNote = (e) => {
-
-        // logic
-        e.stopPropagation()
-        dispatch(pin(id))
-    }
-
 
     return (
 

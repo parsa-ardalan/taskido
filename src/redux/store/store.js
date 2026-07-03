@@ -9,17 +9,19 @@ import storage from 'redux-persist/lib/storage'
 
 // slices
 import notesSlice from "@/redux/notes/notesSlice"
-import routineSlice from '../routine/routineSlice'
+import routineSlice from "@/redux/routine/routineSlice"
+import settingsSlice from "@/redux/settings/settingsSlice"
 
 const rootReducer = combineReducers({
     notes: notesSlice,
     routine: routineSlice,
+    settings: settingsSlice,
 })
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['notes', 'routine'],
+    whitelist: ['notes', 'routine' , 'settings'],
 }
 
 const persistedReducer = persistReducer(

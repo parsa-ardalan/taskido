@@ -16,8 +16,8 @@ const notesSlice = createSlice({
         add: (state, action) => {
 
             const newNote = {
-                id: nanoid(),
-                title: action.payload,
+                id: action.payload.id,
+                title: action.payload.title,
                 checked: false,
                 status: "active",
                 pinned: false

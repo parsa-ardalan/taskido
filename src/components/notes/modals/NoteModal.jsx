@@ -1,30 +1,35 @@
 import { add } from "@/redux/notes/notesSlice"
-import { useDispatch } from "react-redux"
+import { startTaskReminder } from "@/utils/notes/notificationManager";
+import { useDispatch, useSelector } from "react-redux"
+import { nanoid } from "@reduxjs/toolkit";
 
 export default function NoteModal(props) {
 
     // redux
     const dispatch = useDispatch()
+    const noteList = useSelector(state => state.notes)
+    const notificationStatus = useSelector(state => state.settings.notification)
+    console.log(noteList)
 
     // add new routine function
     const addNewNote = () => {
 
-        const noteText = document.getElementById("note-input");
+        const noteText = document.getElementById("note-input")
 
-        if (noteText.value == "") {
-            noteText.classList.remove("shadow-white/50")
-            noteText.classList.add("shadow-red-500")
-            noteText.classList.add("-mt-3")
-            console.log("please enter a note")
-        } else {
+        if (noteText.value === "") return
 
-            noteText.classList.add("shadow-white/50")
-            dispatch(add(noteText.value))
-            props.modalStatus(false)
+        const newNote = {
+            id: nanoid(),
+            title: noteText.value
         }
 
+        dispatch(add(newNote))
 
+        notificationStatus ? startTaskReminder(newNote) : console.log("can't set reminder. notification is closed")
+
+        props.modalStatus(false)
     }
+
 
 
     return (

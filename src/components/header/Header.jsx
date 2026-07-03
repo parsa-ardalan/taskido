@@ -1,100 +1,24 @@
 'use client'
 
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+
+export default function Header() {
 
 
-export default function Header(props) {
+    const date = new Date()
 
-
-    // open notification
-    const openeNotification = () => {
-
-        close(notification)
-        notifications = true
-
-        console.log("notification is open");
-    }
-
-    // close notifications 
-    const closeNotification = () => {
-
-        close(
-            <svg xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 24 24"
-                strokeWidth={1.5} stroke="currentColor"
-                className="size-8 text-white" onClick={openeNotification}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.143 17.082a24.248 24.248 0 0 0 3.844.148m-3.844-.148a23.856 23.856 0 0 1-5.455-1.31 8.964 8.964 0 0 0 2.3-5.542m3.155 6.852a3 3 0 0 0 5.667 1.97m1.965-2.277L21 21m-4.225-4.225a23.81 23.81 0 0 0 3.536-1.003A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6.53 6.53m10.245 10.245L6.53 6.53M3 3l3.53 3.53" />
-            </svg>
-        )
-
-        notifications = false;
-
-        console.log("notification is closed");
-
-    }
-
-    // notification icons
-    const [notification, close] = useState(
-
-        <svg xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 24 24"
-            strokeWidth={1.5} stroke="currentColor"
-            className="size-8 text-white" onClick={closeNotification}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-        </svg>
-
-    )
-
-
-    let date = new Date();
-    let [weekday, day] = useState(date.getDay())
-
-    switch (weekday) {
-
-        case 6: day("Saturday")
-
-            break;
-
-        case 0: day("Sunday")
-
-            break;
-
-        case 1: day("Monday")
-
-            break;
-
-        case 2: day("Tuesday")
-
-            break;
-
-        case 3: day("Wednesday")
-
-            break;
-
-        case 4: day("Thursday")
-
-            break;
-
-        case 5: day("Friday")
-
-            break;
-
-        default: "not found"
-            break;
-    }
+    const weekday = date.toLocaleDateString("en-US", {
+        weekday: "long"
+    })
 
 
     return (
 
         <header className='w-full h-auto'>
 
-
-            {/* icons , logo (top part) */}
             <div className="w-full h-16 flex px-5 shadow-sm shadow-white/50 rounded-2xl">
 
-
-                {/* profile icon */}
                 <Link href={"./profile"} className="w-1/3 h-full flex items-center justify-start">
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 text-white">
@@ -103,25 +27,22 @@ export default function Header(props) {
 
                 </Link>
 
-                {/* logo icon */}
-                <div className="w-1/3 h-full  flex items-center justify-center">
-                    Taskido
+                <div className="w-2/3 h-full flex items-center justify-end">
+                    <Image width={35} height={35} src={"/logo.png"} alt="taskido" />
                 </div>
 
-                {/* notification icon */}
-                <div className="w-1/3 h-full flex items-center justify-end">
-
-                    {notification}
-
-                </div>
 
             </div>
 
 
-            {/* date section */}
             <div className="w-full h-auto shadow-sm shadow-white/50 rounded-2xl my-5 p-5">
-                <h1 className='text-3xl text-white'> {weekday} </h1>
-                <p className='text-sm text-white mt-5'> {new Date().toLocaleDateString()} </p>
+
+                <h1 className='text-3xl text-white'>{weekday}</h1>
+
+                <p className='text-sm text-white mt-5'>
+                    {date.toLocaleDateString()}
+                </p>
+
             </div>
 
         </header>

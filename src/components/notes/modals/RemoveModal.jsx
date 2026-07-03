@@ -1,6 +1,7 @@
 'use client'
 
 import { remove } from "@/redux/notes/notesSlice";
+import { stopTaskReminder } from "@/utils/notes/notificationManager";
 import { useDispatch } from "react-redux"
 
 export default function RemoveModal({ id, isModalClose }) {
@@ -9,6 +10,7 @@ export default function RemoveModal({ id, isModalClose }) {
 
     const removeTheNote = () => {
 
+        stopTaskReminder(id)
         dispatch(remove(id))
 
         isModalClose(true)
