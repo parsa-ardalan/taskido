@@ -12,7 +12,7 @@ export default function Notes() {
         "Coffee is ready, let's build.",
         "What are we cooking up?",
         "Brainstorming for greatness...",
-        "Dreaming big, component by component.",
+        "Dreaming big, day by day",
         "Let's make something beautiful today.",
     ];
 
