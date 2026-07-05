@@ -24,13 +24,21 @@ export default function Theme() {
                 <span className="font-medium">Theme</span>
             </div>
 
-            <button
+            {/* <button
                 onClick={() => setTheme(isDark ? "light" : "dark")}
                 className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition text-white"
                 aria-label="Toggle Theme"
             >
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            </button> */}
+
+            <button
+                className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition text-white"
+                aria-label="Toggle Theme"
+            >
+                <Sun size={18} />
             </button>
+            
         </div>
     )
 }
