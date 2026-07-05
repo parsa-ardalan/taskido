@@ -7,9 +7,7 @@ export default function NoteModal(props) {
 
     // redux
     const dispatch = useDispatch()
-    const noteList = useSelector(state => state.notes)
     const notificationStatus = useSelector(state => state.settings.notification)
-    console.log(noteList)
 
     // add new routine function
     const addNewNote = () => {
@@ -29,8 +27,6 @@ export default function NoteModal(props) {
 
         props.modalStatus(false)
     }
-
-
 
     return (
         <div className="w-full h-full fixed flex items-center justify-center bg-black/50 backdrop-blur-lg">

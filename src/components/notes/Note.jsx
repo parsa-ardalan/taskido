@@ -4,7 +4,7 @@ import { useState } from "react"
 import RemoveModal from "./modals/RemoveModal";
 import EditModal from "./modals/EditModal";
 import { useDispatch } from "react-redux";
-import { pin } from "@/redux/notes/notesSlice";
+import { check, pin } from "@/redux/notes/notesSlice";
 
 export default function Note({ id, title, checked, pinned }) {
 
@@ -31,6 +31,7 @@ export default function Note({ id, title, checked, pinned }) {
 
     const toggleCheck = (e) => {
 
+        dispatch(check(id))
         e.stopPropagation();
 
         setCheck(prev => {

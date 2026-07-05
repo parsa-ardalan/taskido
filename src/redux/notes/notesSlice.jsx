@@ -42,6 +42,16 @@ const notesSlice = createSlice({
             return state.filter(note => note.id !== action.payload);
         },
 
+        check: (state, action) => {
+            const id = action.payload;
+            const note = state.find(note => note.id === id);
+
+            if (!note) return;
+
+            note.checked = !note.checked;
+        },
+
+
         pin: (state, action) => {
 
             const note = state.find(note => note.id === action.payload)
@@ -60,5 +70,5 @@ const notesSlice = createSlice({
     },
 });
 
-export const { add, edit, remove, pin, restore } = notesSlice.actions;
+export const { add, edit, remove, check, pin, restore } = notesSlice.actions;
 export default notesSlice.reducer;
