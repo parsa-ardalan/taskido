@@ -40,7 +40,7 @@ export default function Home() {
           dir="rtl"
         >
           <button
-            className="size-12 shadow-xs shadow-green-500 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            className="size-12 shadow-xs shadow-green-500 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none"
             onClick={openModal}
             aria-label="Add new note"
           >

@@ -1,8 +1,7 @@
-const CACHE_NAME = "taskido-v1";
+const CACHE_VERSION = "v2";
+const CACHE_NAME = `taskido-${CACHE_VERSION}`;
 
-// فقط چیزهایی که واقعا ثابت هستند را کش کن
 const STATIC_ASSETS = [
-  "/",
   "/manifest.json",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
@@ -17,26 +16,77 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
-      )
-    )
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(
+        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
+      );
+      await self.clients.claim();
+    })()
   );
 });
 
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
 self.addEventListener("fetch", (event) => {
-  // اگر در حالت توسعه هستیم یا فایل مربوط به HMR است، کش نکن
-  if (
-    event.request.url.includes("_next/static/") || 
-    event.request.url.includes("hot-update")
-  ) {
+  const req = event.request;
+  const url = new URL(req.url);
+
+  if (req.method !== "GET") return;
+  if (url.origin !== self.location.origin) return;
+
+  if (req.mode === "navigate") {
+    event.respondWith(
+      (async () => {
+        try {
+          const fresh = await fetch(req);
+
+          if (fresh.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(req, fresh.clone());
+          }
+
+          return fresh;
+        } catch (e) {
+          const cached = await caches.match(req);
+          return cached || Response.error();
+        }
+      })()
+    );
+    return;
+  }
+
+  if (STATIC_ASSETS.includes(url.pathname)) {
+    event.respondWith(
+      caches.match(req).then(async (cached) => {
+        if (cached) return cached;
+
+        const fresh = await fetch(req);
+        if (fresh.ok) {
+          const cache = await caches.open(CACHE_NAME);
+          cache.put(req, fresh.clone());
+        }
+        return fresh;
+      })
+    );
+    return;
+  }
+
+  if (url.pathname.startsWith("/_next/")) {
     return;
   }
 
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
+    (async () => {
+      try {
+        return await fetch(req);
+      } catch (e) {
+        return (await caches.match(req)) || Response.error();
+      }
+    })()
   );
 });
