@@ -1,13 +1,13 @@
 import { Info } from "lucide-react"
 
-
 export default function InfoBox() {
 
     return (
-        <div className="shadow-sm shadow-white/50 rounded-2xl p-4 space-y-2">
-            <div className="flex items-center gap-3">
-                <Info size={20} />
-                <span className="font-medium">App Info</span>
+        <div className="border border-zinc-800 backdrop-blur-sm shadow-sm shadow-white/50 rounded-2xl p-4 sm:p-5 space-y-3 transition-all duration-300">
+            
+            <div className="flex items-center gap-3 text-white">
+                <Info size={20} className="text-zinc-400" />
+                <span className="font-semibold text-sm sm:text-base">App Info</span>
             </div>
 
             <p className="text-sm text-zinc-400 leading-relaxed">
@@ -16,6 +16,7 @@ export default function InfoBox() {
                 for managing notes, routines, and daily activities while maintaining
                 an easy use experience.
             </p>
+            
         </div>
     )
 }

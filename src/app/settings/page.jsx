@@ -8,20 +8,21 @@ import Theme from "@/components/settings/Theme"
 export default function SettingsPage() {
 
     return (
-        <div className="page grid grid-cols-1 gap-5">
+
+        <div className="page flex flex-col gap-5 max-w-4xl mx-auto">
 
             {/* Language */}
             <Language />
 
-            {/* Theme */}
-            <Theme />
-
             {/* Notifications */}
             <Notifications />
+
+            {/* Theme */}
+            <Theme />
 
             {/* App Info */}
             <InfoBox />
 
         </div>
     )
-}
+} 

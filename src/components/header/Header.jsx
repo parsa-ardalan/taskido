@@ -17,9 +17,10 @@ export default function Header() {
 
         <header className='w-full h-auto'>
 
-            <div className="w-full h-16 flex px-5 shadow-sm shadow-white/50 rounded-2xl">
+            {/* profile / logo */}
+            <div className="w-full h-16 flex px-4 md:px-6 shadow-sm shadow-white/50 rounded-2xl transition-all">
 
-                <Link href={"./profile"} className="w-1/3 h-full flex items-center justify-start">
+                <Link href={"./profile"} className="w-1/3 h-full flex items-center justify-start cursor-pointer active:scale-95 transition-transform">
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 text-white">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -28,18 +29,19 @@ export default function Header() {
                 </Link>
 
                 <div className="w-2/3 h-full flex items-center justify-end">
-                    <Image width={35} height={35} src={"/logo.png"} alt="taskido" />
+                    <Image width={35} height={35} src={"/logo.png"} alt="taskido" className="w-auto h-auto object-contain" />
                 </div>
 
 
             </div>
 
 
-            <div className="w-full h-auto shadow-sm shadow-white/50 rounded-2xl my-5 p-5">
+            {/* date box */}
+            <div className="w-full h-auto shadow-sm shadow-white/50 rounded-2xl my-5 p-5 transition-all">
 
-                <h1 className='text-3xl text-white'>{weekday}</h1>
+                <h1 className='text-2xl md:text-3xl lg:text-4xl text-white transition-all'>{weekday}</h1>
 
-                <p className='text-sm text-white mt-5'>
+                <p className='text-sm text-zinc-400 mt-5 md:mt-5 transition-all'>
                     {date.toLocaleDateString()}
                 </p>
 

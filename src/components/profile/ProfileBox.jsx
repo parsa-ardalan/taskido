@@ -23,12 +23,12 @@ export default function ProfileBox() {
 
 
     return (
-        <div className="relative w-full h-fit shadow-sm shadow-white/50 rounded-2xl mt-5 p-6 flex flex-col justify-center transition-all duration-500">
+        <div className="relative w-full h-fit mt-5 rounded-2xl shadow-sm shadow-white/50 p-5 flex flex-col justify-center transition-all duration-500">
 
             {!isEditMode && (
                 <button
                     onClick={() => setMode(true)}
-                    className="absolute bottom-6 right-6 text-white/30 hover:text-white transition-colors"
+                    className="absolute bottom-5 right-5 text-zinc-500 transition-colors"
                 >
                     <Edit3 className="w-4 h-4" />
                 </button>
@@ -39,31 +39,31 @@ export default function ProfileBox() {
                     <input
                         value={tempName}
                         onChange={(e) => setTempName(e.target.value)}
-                        className="bg-transparent text-white text-lg border-b border-white/10 focus:border-white/50 outline-none w-full pb-2 pl-1"
+                        className="bg-transparent text-white text-base sm:text-lg border-b border-zinc-700 focus:border-zinc-400 outline-none w-full pb-2 pl-1 transition-colors"
                         placeholder="your name..."
                         autoFocus
                     />
                     <input
                         value={tempBio}
                         onChange={(e) => setTempBio(e.target.value)}
-                        className="bg-transparent text-white/60 text-sm border-b border-white/5 focus:border-white/30 outline-none w-full pb-2 pl-1"
+                        className="bg-transparent text-zinc-400 text-base sm:text-lg border-b border-zinc-700 focus:border-zinc-400 outline-none w-full pb-2 pl-1 transition-colors"
                         placeholder="write a bio..."
                     />
-                    <div className="flex gap-4 mt-2">
-                        <button onClick={handleSave} className="flex items-center gap-1 text-[12px] text-green-400/80 hover:text-green-400 transition-colors uppercase tracking-widest font-bold">
+                    <div className="flex flex-wrap gap-4 mt-3">
+                        <button onClick={handleSave} className="flex items-center gap-1 text-[12px] text-green-500 transition-colors uppercase tracking-widest font-bold">
                             <Check className="w-4 h-4" /> save
                         </button>
-                        <button onClick={() => setMode(false)} className="flex items-center gap-1 text-[12px] text-white/25 hover:text-white transition-colors uppercase tracking-widest font-bold">
+                        <button onClick={() => setMode(false)} className="flex items-center gap-1 text-[12px] text-zinc-500 transition-colors uppercase tracking-widest font-bold">
                             <X className="w-4 h-4" /> cancel
                         </button>
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-col gap-1">
-                    <h2 className="text-2xl font-bold text-white tracking-tight lowercase">
-                        {userInfo?.name || "parsa"}
+                <div className="flex flex-col gap-2 pr-8">
+                    <h2 className="text-xl sm:text-2xl font-bold text-white  tracking-tight lowercase break-words">
+                        {userInfo?.name || "user"}
                     </h2>
-                    <p className="text-sm text-white/40 font-light leading-relaxed max-w-[80%]">
+                    <p className="text-sm text-zinc-400 font-light leading-relaxed max-w-full sm:max-w-[85%] break-words">
                         {userInfo?.bio || "no bio yet. click edit to add one."}
                     </p>
                 </div>

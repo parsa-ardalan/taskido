@@ -5,15 +5,14 @@ import RoutineModal from "@/components/routine/RoutineModal";
 
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// @ts-ignore
 import { add } from "@/redux/routine/routineSlice";
 import Routine from "@/components/routine/Routine";
 
 export default function RoutinePage() {
 
-
+    // @ts-ignore
     const routineList = useSelector(state => state.routine)
-    console.log(routineList)
-
 
     const suggestedRoutine = [
         {
@@ -51,47 +50,63 @@ export default function RoutinePage() {
         modalStatus(true)
     }
 
-    const addSuggestedRoutine = (index) => {
-        dispatch(add(index))
+    const addSuggestedRoutine = (routine) => {
+        dispatch(add(routine))
     }
 
     return (
-        <div className="w-screen h-screen py-8">
+        <div className="w-full min-h-screen py-8 flex flex-col items-center">
 
             {/* routine modal */}
-            {
-                !isModalOpen ? (
-                    <div className="hidden"> </div>
-                ) : (
-                    <div>
-                        <RoutineModal modalStatus={modalStatus} />
-                    </div>
-                )
-            }
+            {isModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-xs">
+                    <RoutineModal modalStatus={modalStatus} />
+                </div>
+            )}
 
             {/* routine content */}
-            <div className="page">
+            <div className="page max-w-4xl mx-auto w-full px-4 sm:px-6">
 
-                {/* suggested routines */}
-                <div className="w-full h-32 grid grid-cols-4">
+                <div className="w-full grid grid-cols-4 gap-3 mb-5">
                     {
                         suggestedRoutine.map((routine) => (
-                            <div className="col-span-1 flex items-center justify-center" key={routine.id} onClick={() => { addSuggestedRoutine(routine) }}>
-                                <Image width={35} height={35} alt={routine.name} src={routine.icon} />
+                            <div
+                                className="col-span-1 flex flex-col sm:flex-row gap-2 items-center justify-center rounded-2xl cursor-pointer transition-all duration-300 active:scale-95"
+                                key={routine.id}
+                                onClick={() => addSuggestedRoutine(routine)}
+                            >
+                                <Image width={30} height={30} alt={routine.name} src={routine.icon} className="object-contain" />
+
                             </div>
                         ))
                     }
                 </div>
 
-                <hr />
+                <hr className="border-zinc-800 my-5" />
 
-                {/* user routine */}
-                <div className="w-full h-auto grid gap-5 py-5">
-                    {
-                        routineList.map((routine) => <Routine name={routine.name} time={routine.time} icon={routine.icon} id={routine.id} key={routine.id} />)
-                    }
+                <div className="w-full h-auto py-3">
 
-                    <button className="w-full h-14 text-md shadow-sm shadow-green-500/50 text-green-700 rounded-xl flex items-center justify-center" onClick={openModal}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                        {
+                            routineList.map((routine) => (
+                                <Routine
+                                    name={routine.name}
+                                    time={routine.time}
+                                    icon={routine.icon}
+                                    id={routine.id}
+                                    key={routine.id}
+                                />
+                            ))
+                        }
+                    </div>
+
+                    <button
+                        className="w-full h-14 text-sm font-semibold text-green-500 shadow-sm shadow-green-500 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer active:scale-[0.99]"
+                        onClick={openModal}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
                         add new routine
                     </button>
 

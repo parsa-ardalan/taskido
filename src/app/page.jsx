@@ -17,34 +17,39 @@ export default function Home() {
   }
 
   return (
-
     <>
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <NoteModal modalStatus={modalStatus} />
+        </div>
+      )}
 
-      {
-        !isModalOpen ? (
-          <div className="hidden"> </div>
-        ) : (
-          <div>
-            <NoteModal modalStatus={modalStatus} />
-          </div>
-        )
-      }
+      {/* 
+        max-w-7xl و mx-auto باعث میشه در دسکتاپ محتوا بیش از حد عریض نشه.
+        w-full و min-h-screen هم پوشش کامل دستگاه‌ها رو تضمین می‌کنه.
+      */}
+      <main className="page mx-auto max-w-7xl w-full min-h-screen flex flex-col justify-between pb-24 md:pb-8">
 
-      <main className="page">
+        <div className="w-full">
+          <Header />
+          <Notes />
+        </div>
 
-        <Header />
-        <Notes />
-
-        <div className="w-full h-fit px-3 mt-10 flex items-center justify-center" dir="rtl">
-          <button className="size-12 shadow-xs shadow-green-500/50 rounded-full flex items-center justify-center" onClick={openModal}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-green-500">
+        <div
+          className="fixed bottom-6 right-6 md:relative md:bottom-auto md:right-auto w-auto rounded-full md:w-full h-fit mt-10 flex items-center justify-center z-40 backdrop-blur-xs"
+          dir="rtl"
+        >
+          <button
+            className="size-12 shadow-xs shadow-green-500 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            onClick={openModal}
+            aria-label="Add new note"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="size-5 text-green-500">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </button>
         </div>
       </main>
-
     </>
-
   );
 }

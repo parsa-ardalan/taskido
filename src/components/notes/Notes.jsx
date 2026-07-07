@@ -34,12 +34,14 @@ export default function Notes() {
 
     return (
 
-        <div className="w-full h-4/6">
+        <div className="w-full h-auto">
 
-            <h1 className="mt-10 mb-5"> {noteTitle} </h1>
+            <h1 className="mt-10 mb-5 md:mb-6 text-base sm:text-lg md:text-xl">
+                {noteTitle}
+            </h1>
 
             {/* notes */}
-            <div className="w-full h-auto grid grid-cols-1 gap-5 px-3">
+            <div className="w-full h-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 px-3 sm:px-4 md:px-6">
                 {activeNotesList.map((note) => <Note key={note.id} id={note.id} title={note.title} checked={note.checked} pinned={note.pinned} />)}
             </div>
 
