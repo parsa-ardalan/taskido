@@ -15,7 +15,7 @@ export default function EditModal({ id, title, isModalClose }) {
 
     return (
         <div
-            className="w-full h-full fixed inset-0 z-50 flex items-center justify-center px-5 backdrop-blur-lg bg-black/25"
+            className="w-full h-full fixed inset-0 z-50 flex items-center justify-center px-10 backdrop-blur-lg bg-black/25"
             onClick={() => isModalClose(false)}
         >
 

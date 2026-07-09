@@ -74,6 +74,7 @@ export default function Note({ id, title, checked, pinned }) {
             <div className={`w-full h-14 rounded-2xl flex items-center justify-between transition-all duration-300 cursor-pointer  ${taskCheck ? "shadow-sm shadow-green-500" : "shadow-sm shadow-white/50"}`} onClick={toggleModal}>
 
                 <div className="flex items-center w-full h-full">
+
                     {/* checkbox */}
                     <div
                         className="w-14 h-14 flex items-center justify-center flex-shrink-0"
@@ -90,14 +91,14 @@ export default function Note({ id, title, checked, pinned }) {
                                     viewBox="0 0 24 24"
                                     strokeWidth={1.8}
                                     stroke="currentColor"
-                                    className="size-6 text-green-500 cursor-pointer transition-transform active:scale-90"
+                                    className="size-6.5 text-green-500 cursor-pointer transition-transform active:scale-90"
                                     onClick={toggleCheck}
                                 >
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                             ) : (
                                 <button
-                                    className="size-5 rounded-full border border-zinc-600 transition-colors cursor-pointer"
+                                    className="size-5.5 rounded-full border border-zinc-600 transition-colors cursor-pointer"
                                     onClick={toggleCheck}
                                 />
                             )
@@ -110,6 +111,7 @@ export default function Note({ id, title, checked, pinned }) {
                             {title}
                         </p>
                     </div>
+                    
                 </div>
 
             </div>
