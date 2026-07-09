@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 // @ts-ignore
 import { add } from "@/redux/routine/routineSlice";
 import Routine from "@/components/routine/Routine";
+import BackwardsButton from "@/components/backwards/BackwardsButton";
 
 export default function RoutinePage() {
 
@@ -55,7 +56,7 @@ export default function RoutinePage() {
     }
 
     return (
-        <div className="w-full min-h-screen py-8 flex flex-col items-center">
+        <div className="w-full h-screen flex flex-col items-center">
 
             {/* routine modal */}
             {isModalOpen && (
@@ -65,9 +66,12 @@ export default function RoutinePage() {
             )}
 
             {/* routine content */}
-            <div className="page max-w-4xl mx-auto w-full px-4 sm:px-6">
+            <div className="page max-w-4xl mx-auto">
 
-                <div className="w-full grid grid-cols-4 gap-3 mb-5">
+                <BackwardsButton />
+
+                {/* suggested routine */}
+                <div className="w-full grid grid-cols-4 gap-3 mb-5 mt-10">
                     {
                         suggestedRoutine.map((routine) => (
                             <div
@@ -84,9 +88,10 @@ export default function RoutinePage() {
 
                 <hr className="border-zinc-800 my-5" />
 
-                <div className="w-full h-auto py-3">
+                {/* routine box */}
+                <div className="w-full h-auto">
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
                         {
                             routineList.map((routine) => (
                                 <Routine
@@ -100,15 +105,20 @@ export default function RoutinePage() {
                         }
                     </div>
 
-                    <button
-                        className="w-full h-14 text-sm font-semibold text-green-500 shadow-sm shadow-green-500 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer active:scale-[0.99]"
-                        onClick={openModal}
+                    <div
+                        className="fixed bottom-6 right-6 md:relative md:bottom-auto md:right-auto w-auto rounded-full md:w-full h-fit mt-10 flex items-center justify-center z-40 backdrop-blur-xs"
+                        dir="rtl"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-5">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        add new routine
-                    </button>
+                        <button
+                            className="size-12 shadow-xs shadow-green-500 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none"
+                            onClick={openModal}
+                            aria-label="Add new note"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="size-5 text-green-500">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                    </div>
 
                 </div>
 

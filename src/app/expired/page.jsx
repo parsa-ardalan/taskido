@@ -2,6 +2,7 @@
 
 import { useSelector } from "react-redux";
 import ExpiredTask from "@/components/notes/ExpiredTask";
+import BackwardsButton from "@/components/backwards/BackwardsButton";
 
 export default function Expired() {
 
@@ -15,6 +16,8 @@ export default function Expired() {
 
     return (
         <div className='page flex flex-col items-center mx-auto max-w-7xl w-full min-h-screen pb-12'>
+
+            <BackwardsButton />
 
             {expiredNotesList.length === 0 ? (
 

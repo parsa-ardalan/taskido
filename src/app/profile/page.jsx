@@ -1,3 +1,4 @@
+import BackwardsButton from "@/components/backwards/BackwardsButton"
 import ProfileBox from "@/components/profile/ProfileBox"
 import Image from "next/image"
 import Link from "next/link"
@@ -28,6 +29,9 @@ export default function Profile() {
     return (
 
         <div className="page mx-auto w-full max-w-4xl">
+
+            <BackwardsButton />
+
             <ProfileBox />
 
             <div className="w-full h-auto mt-6 sm:mt-8">

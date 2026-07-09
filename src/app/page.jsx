@@ -49,6 +49,7 @@ export default function Home() {
             </svg>
           </button>
         </div>
+        
       </main>
     </>
   );
