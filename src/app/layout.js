@@ -2,6 +2,7 @@ import "./globals.css";
 import Provider from "@/redux/store/provider";
 import { ThemeProvider } from "next-themes";
 import PWARegister from "@/components/pwa/PWARegister";
+import AppInitializer from "@/utils/notes/AppInitializer";
 
 export const metadata = {
   title: "Taskido",
@@ -23,8 +24,10 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Provider>
-            <PWARegister />
-            {children}
+            <AppInitializer>
+              <PWARegister />
+              {children}
+            </AppInitializer>
           </Provider>
         </ThemeProvider>
       </body>

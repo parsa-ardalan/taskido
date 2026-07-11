@@ -9,11 +9,7 @@ export default function ExpiredTask({ id, title }) {
 
     // functions
     const restoreTask = () => {
-
-        console.log("task restored")
-
         dispatch(restore(id))
-
     }
 
 

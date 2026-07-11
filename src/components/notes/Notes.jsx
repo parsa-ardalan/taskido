@@ -17,6 +17,7 @@ export default function Notes() {
     ];
 
     const notesList = useSelector(state => state.notes);
+
     const sortedNotes = [...notesList].sort((a, b) => b.pinned - a.pinned)
 
     const activeNotesList = sortedNotes.filter(

@@ -24,7 +24,6 @@ const SettingsSlice = createSlice({
 
         toggleNotification: (state, action) => {
             state.notification = action.payload
-            console.log(state.notification)
         },
 
     }
